@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { config } from './config';
@@ -15,16 +16,23 @@ const setupConsentManagerUI = async (): Promise<void> => {
   console.log('Purpose types config:', airgap.getPurposeTypes());
   console.log('Consent Manager UI config:', config);
 
+  const consentObj = airgap.getConsent();
+  const obj = airgap.getPurposeTypes();
+
   // TODO: Setup your consent manager UI DOM here
   const App: React.FC = () => {
+      const newText = (config.body).split('\n').map(str => {
+        return (
+          <p>{str}</p>)
+      })
     return (
       <>
         <section>
           <header>
-            <h2>Consent Manager</h2>
-          </header>
+            <h2>{config.consentManagerTitle}</h2>
+          </header> 
           <p>
-            Edit <code>src/ui/ui.tsx</code> and save to reload.
+           {newText}
           </p>
           <h3>
             Current tracking purpose consent
