@@ -42,14 +42,13 @@ const setupConsentManagerUI = async (): Promise<void> => {
           {Object.keys(massiveObj).map((key) => {
                 console.log(massiveObj[key].name, 'hereherere');
                 return (
-                  <div>
+                  <div className="both">
                   <ToggleSwitch label={massiveObj[key].name} />
                   <span>
                     {' '}
                     <img
                       src={`https://res.cloudinary.com/dh41vh9dx/image/upload/v1619578173/3946401821543238897.svg`}
                         className="info-icon"
-                        style={{height: "30px"}}
                       alt="information icon"
                       onClick={toggling}
                     />
