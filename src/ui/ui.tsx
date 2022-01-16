@@ -5,6 +5,7 @@ import { config } from './config';
 import { getAirgap } from './init';
 import ToggleSwitch from './ToggleSwitch/ToggleSwitch';
 import Tooltip from './ToolTip/Tooltip';
+import Button from './Button/Button';
 import './ui.css';
 
 let initialized = false;
@@ -15,6 +16,7 @@ const setupConsentManagerUI = async (): Promise<void> => {
   console.log('Initializing Consent Manager UI...');
 
   const airgap = await getAirgap();
+  console.log(airgap.self, "hehdsjkbfndskjbfsdk")
   const massiveObj = airgap.getPurposeTypes();
   console.log('Purpose types config:', airgap.getPurposeTypes());
   console.log('Consent Manager UI config:', config);
@@ -39,11 +41,22 @@ const setupConsentManagerUI = async (): Promise<void> => {
           </header>
           <p>{newText}</p>
           <h3>{config.prefsHeader}</h3>
+          <div className="button-container">
+
+          <Button
+            text={'Accept All'}
+            onClick={(e) => console.log('Save clicked')}
+          />
+          <Button
+            text={'Deny All'}
+            onClick={(e) => console.log('accept clicked')}
+          />
+          </div>
           {Object.keys(massiveObj).map((key) => {
-                console.log(massiveObj[key].name, 'hereherere');
+                console.log(massiveObj[key], 'hereherere');
                 return (
                   <div className="both">
-                  <ToggleSwitch label={massiveObj[key].name} />
+                  <ToggleSwitch label={massiveObj[key].name}  />
                   <span>
                     {' '}
                     <img
@@ -54,15 +67,18 @@ const setupConsentManagerUI = async (): Promise<void> => {
                     />
                     </span>
                     
-                    {isOpen && <Tooltip toggling={toggling} text={massiveObj[key].description} />}
+                    {isOpen && <Tooltip toggling={toggling} text="informative stuff"  />}
                     </div>
                 );
-              })}
-          <pre>{JSON.stringify(airgap.getConsent(), null, 2)}</pre>
-          <h3>Tracking purpose types</h3>
-          <pre>{JSON.stringify(airgap.getPurposeTypes(), null, 2)}</pre>
+          })}
+            <Button
+              text={'Save Preferences'}
+              onClick={(e) => console.log('deny clicked')}
+            />
+          <pre>{config.requiredDisclosuresHeader}</pre>
+          {/* <pre>{JSON.stringify(airgap.getPurposeTypes(), null, 2)}</pre> */}
           <h3>Consent Manager UI config</h3>
-          <pre>{JSON.stringify(config, null, 2)}</pre>
+          {/* <pre>{JSON.stringify(config, null, 2)}</pre> */}
         </section>
       </>
     );
