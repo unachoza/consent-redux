@@ -13,7 +13,7 @@ self.transcend = {
   ...self.transcend,
 } as any;
 
-self.airgap = {
+self.airgap = { 
   readyQueue: [],
   /**
    * Ready callback registrar

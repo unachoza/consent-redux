@@ -1,13 +1,9 @@
 //@ts-nocheck
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import type { TranscendAPI } from './@types/airgap.js';
-import {collectCookies} from './consentModule/app'
 
 const App: React.FC = () => {
-
-  collectCookies()
   return (
     <div className="App">
       <header className="App-header">
@@ -21,11 +17,6 @@ const App: React.FC = () => {
         >
           Data Collection Preferences
         </button>
-        <br/>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
       </header>
     </div>
   );

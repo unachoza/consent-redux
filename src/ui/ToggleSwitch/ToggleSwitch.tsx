@@ -4,7 +4,7 @@ import React from "react";
 import "./ToggleSwitch.css";
   
 const ToggleSwitch = ({ key, label, value, name, checked, onChange }) => {
-  console.log({value}, 'of ads')
+  console.log({value}, label, checked, 'of ads')
   return (
     <div className="container">
       <div className="toggle-switch">

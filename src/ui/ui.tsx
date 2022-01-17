@@ -13,19 +13,33 @@ let initialized = false;
 let root: Element | undefined;
 
 const setupConsentManagerUI = async (): Promise<void> => {
-  console.log('Initializing Consent Manager UI...');
+  // console.log('Initializing Consent Manager UI...');
 
   const airgap = await getAirgap();
-  console.log(airgap.self, "hehdsjkbfndskjbfsdk")
+  // console.log(airgap.self, "hehdsjkbfndskjbfsdk")
   const massiveObj = airgap.getPurposeTypes();
-  console.log('Purpose types config:', airgap.getPurposeTypes());
-  console.log('Consent Manager UI config:', config);
+  console.log({ massiveObj })
+  // AirgapAPI.setConsent(auth, consent): boolean;
+//   AirgapAPI.optIn(auth): boolean;
+// AirgapAPI.optOut(auth): boolean;
+  console.log(airgap.optIn(), "go gogogogogogo")
+  
+  
+  // console.log('Purpose types config:', airgap.getPurposeTypes());
+
+  // console.log('Consent Manager UI config:', config);
 
   const consentObj = airgap.getConsent();
-  console.log({ consentObj }, 'teh words');
+  // console.log({ consentObj }, 'teh words');
   const obj = airgap.getPurposeTypes();
-  console.log('this here', obj);
+  // console.log('this here', obj);
 
+  window.onload = () => { 
+    console.log('yes whtere sis this i need sto see it')
+    // if (shouldShowPopup()) {
+    //   const conset = alert('Are you sure you want to')
+    // }
+  }
   // TODO: Setup your consent manager UI DOM here
   const App: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -33,8 +47,19 @@ const setupConsentManagerUI = async (): Promise<void> => {
     const newText = config.body.split('\n').map((str) => {
       return <p>{str}</p>;
     });
+
+    const onToggle = (label) => {
+      console.log({label});
+      if (!localStorage.getItem(label)) {
+        console.log('in here')
+        localStorage.setItem(label, 'yesss')
+      }
+      
+    };
+
+
     return (
-      <>
+      <div id="consent-ui-container">
         <section>
           <header>
             <h2>{config.consentManagerTitle}</h2>
@@ -56,7 +81,7 @@ const setupConsentManagerUI = async (): Promise<void> => {
                 console.log(massiveObj[key], 'hereherere');
                 return (
                   <div className="both">
-                  <ToggleSwitch label={massiveObj[key].name}  />
+                  <ToggleSwitch label={massiveObj[key].name} value={false} onChange={(label)=> onToggle(label)}  />
                   <span>
                     {' '}
                     <img
@@ -80,36 +105,43 @@ const setupConsentManagerUI = async (): Promise<void> => {
           <h3>Consent Manager UI config</h3>
           {/* <pre>{JSON.stringify(config, null, 2)}</pre> */}
         </section>
-      </>
+      </div>
     );
   };
 
+  
   root = document.createElement('div');
   root.className = 'ConsentManager';
+  const consetManager = document.getElementsByClassName('ConsentManager');
+  console.log("neeeelsndflsdknflsdknflksd", {consetManager})
   ReactDOM.render(
     <React.StrictMode>
       <App />
     </React.StrictMode>,
     root,
-  );
-  document.body.firstElementChild?.before(root);
-  // END: TODO: Setup your consent manager UI DOM here
-
-  initialized = true;
+    );
+    document.body.firstElementChild?.before(root);
+    // END: TODO: Setup your consent manager UI DOM here
+    
+    initialized = true;
   console.log('Consent Manager UI initialized');
 };
+  
 
-const showConsentManagerUI = async () => {
-  const airgap = await getAirgap();
-  console.log('Current consent:', airgap.getConsent());
+  
+  const showConsentManagerUI = async () => {
+    const airgap = await getAirgap();
+    console.log('Current consent:', airgap.getConsent());
+    
+    // TODO: Display your consent manager UI here
 
-  // TODO: Display your consent manager UI here
-};
-
-export const showConsentManager = async () => {
-  console.log('transcend.showConsentManager() called');
-  if (!initialized) {
-    await setupConsentManagerUI();
-  }
-  await showConsentManagerUI();
-};
+  };
+  
+  export const showConsentManager = async () => {
+    console.log('transcend.showConsentManager() called');
+    if (!initialized) {
+      await setupConsentManagerUI();
+    }
+    await showConsentManagerUI();
+  };
+  

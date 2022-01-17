@@ -8,23 +8,28 @@ const cookieStorage = {
           return cookies[item];
       },
       setItem: (item, value) => {
-            document.cookie = `${item}=${value};`
-        }
+        document.cookie = `${item}=${value};`
+        
+  },
+      // setAllTrue
+
+      //SetAllFalse
+
       }
       
-      
-      
-      export const words = 'these workds '
       
 export const collectCookies = () => {
     
   const storageType = cookieStorage;
   const consentPropertyName = 'Ariannaoptions';
-  const shouldShowPopup = () => !storageType.getItem(consentPropertyName);
-  const saveToStorage = () => storageType.setItem(consentPropertyName, true);
+  const shouldShowPopup = () => !localStorage.getItem(consentPropertyName);
+  const saveToStorage = () => localStorage.setItem(consentPropertyName, true);
 
   window.onload = () => { 
-    console.log({words})
+      
+    // ReactDOM.findDOMNode(<component/>).getElementsByClassName('snap')
+    // const ui = document.getElementById('consent-ui-container')
+    // console.log({component})
     if (shouldShowPopup()) {
       const consent = confirm('Are you sure you want to')
       if (consent) {

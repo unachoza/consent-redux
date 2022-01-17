@@ -68,6 +68,8 @@ export type AirgapSettings = Partial<{
   log: string;
 }>;
 
+// AirgapAPI.optIn(auth): boolean;
+// AirgapAPI.optOut(auth): boolean;
 /** airgap.js API */
 export type AirgapAPI = Readonly<{
   /** Get tracking consent */
@@ -150,6 +152,8 @@ export type TrackingConsent = {
   /** Custom tracking purpose */
   [purpose: string]: boolean | undefined;
 };
+Object[key] 
+Object.key
 
 /** Tracking purpose consent config with timestamp & auth metadata */
 export type TrackingConsentDetails = {

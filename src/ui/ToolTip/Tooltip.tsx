@@ -3,7 +3,7 @@ import React from 'react';
 import './Tooltip.scss';
 
 const Tooltip = ({ toggling, text }) => {
-  console.log(toggling)
+  console.log(text)
   return (
     <div className="info-modal-container">
       <div className="modal-container show-modal" id="modal ">
